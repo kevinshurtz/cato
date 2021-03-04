@@ -37,7 +37,7 @@ environment for the project and install the dependencies in
 ```bash
 # Create and enter a virtual environment
 python3 -m venv .venv
-source activate ./.venv/bin/activate
+source .venv/bin/activate
 
 # Install the dependencies for the project
 pip install -r requirements.txt

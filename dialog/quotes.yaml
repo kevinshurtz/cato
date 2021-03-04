@@ -1,0 +1,138 @@
+quotes:
+  - content: >
+      Those who are serious in ridiculous matters will be ridiculous in serious
+      matters.
+    topics:
+      - manners
+      - wisdom
+
+  - content: If you are ruled by mind you are a king; if by body, a slave.
+    topics:
+      - ethics
+      - manners
+      - wisdom
+
+  - content: >
+      I prefer to do right and get no thanks than to do wrong and receive no
+      punishment.
+    topics:
+      - humility
+      - ethics
+      - wisdom
+
+  - content: >
+      Wise men profit more from fools than fools from wise men; for the wise
+      men shun the mistakes of fools, but fools do not imitate the successes of
+      the wise.
+    topics:
+      - perception
+      - wisdom
+
+  - content: >
+      We cannot control the evil tongues of others; but a good life enables us
+      to disregard them.
+    topics:
+      - manners
+      - ethics
+      - wisdom
+
+  - content: >
+      After I'm dead I'd rather have people ask why I have no monument than why
+      I have one.
+    topics:
+      - government
+      - manners
+      - humor
+      - wisdom
+
+  - content: >
+      The hero saves us. Praise the hero! Now, who will save us from the hero?
+    topics:
+      - government
+
+  - content: The worst ruler is one who cannot rule himself.
+    topics:
+      - manners
+      - ethics
+      - government
+      - wisdom
+
+  - content: >
+      I think the first virtue is to restrain the tongue; he approaches nearest
+      to gods who knows how to be silent, even though he is in the right.
+    topics:
+      - manners
+      - ethics
+      - religion
+      - wisdom
+
+  - content: Tis sometimes the height of wisdom to feign stupidity.
+    topics:
+      - perception
+      - ethics
+      - humor
+      - wisdom
+
+  - content: An angry man opens his mouth and shuts his eyes.
+    topics:
+      - ethics
+      - anger
+      - wisdom
+
+  - content: Anger so clouds the mind that it cannot perceive the truth.
+    topics:
+      - ethics
+      - anger
+      - wisdom
+
+  - content: He who fears death has already lost the life he covets.
+    topics:
+      - ethics
+      - death
+      - wisdom
+
+  - content: I can pardon everybody\'s mistakes except my own.
+    topics:
+      - humility
+      - forgiveness
+      - wisdom
+
+  - content: Patience is the greatest of all virtues.
+    topics:
+      - patience
+      - ethics
+      - wisdom
+
+  - content: It is a difficult matter to argue with the belly since it has no ears.
+    topics:
+      - patience
+      - humor
+      - wisdom
+
+  - content: Speech is the gift of all, but the thought of few.
+    topics:
+      - speech
+      - wisdom
+
+  - content: Grasp the subject, the words will follow.
+    topics:
+      - speech
+      - wisdom
+
+  - content: Wise men learn more from fools than fools from the wise.
+    topics:
+      - perception
+      - wisdom
+
+  - content: >
+      Buy not what you want, but what you have need of; what you do not want is
+      dear at a farthing.
+    topics:
+      - frugality
+      - wisdom
+
+  - content: Even though work stops, expenses run on
+    topics:
+      - frugality
+      - humor
+      - wisdom

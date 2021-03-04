@@ -14,11 +14,11 @@ Cato the Elder is well known for his severe Roman manners, opposition to
 Hellenization, and his strong insistence upon the destruction of
 Carthage.
 
-The latter point is perhaps his most famous attributed.  After becoming
-convinced that an ascendant Carthage was Rome's greatest threat, Cato concluded
-every Senate speech - regardless of topic - with the phrase, "ceterum autem
-censeo Carthaginem esse delendam", or "furthermore, I consider that Carthage
-must be destroyed."
+The final point above is perhaps his most famous feature.  After becoming
+convinced that a newly ascendant Carthage was Rome's greatest geopolitical
+threat, Cato concluded every Senate speech - regardless of topic - with the
+phrase, "ceterum autem censeo Carthaginem esse delendam", or "furthermore, I
+consider that Carthage must be destroyed."
 
 ### Why was this project made?
 

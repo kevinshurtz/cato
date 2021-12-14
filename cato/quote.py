@@ -2,6 +2,7 @@ import re
 import random
 import yaml
 
+
 def _quotes():
     with open('./dialog/quotes.yaml') as file:
         quotes = yaml.safe_load(file)
@@ -16,10 +17,12 @@ _quote_lines = _quotes()
 
 def should_respond(content):
     re_flags = re.IGNORECASE
-    quotes = re.search(r"cato(?:'s)?", content, re_flags) and re.search(r'quote(?:s|d)?', content, re_flags)
 
-    return True if quotes else False
+    name_matches = re.search(r"cato(?:'s)?", content, re_flags)
+    quote_matches = re.search(r'quote(?:s|d)?', content, re_flags)
+
+    return name_matches and quote_matches
 
 
-def make_reply(content):
+def make_reply():
     return random.choice(_quote_lines)

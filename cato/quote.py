@@ -24,5 +24,5 @@ def should_respond(content):
     return name_matches and quote_matches
 
 
-def make_reply():
+def make_reply(_message):
     return random.choice(_quote_lines)

@@ -1,4 +1,5 @@
 import discord
+import logging
 import os
 import dotenv
 import re
@@ -11,6 +12,13 @@ from . import quote
 dotenv.load_dotenv()
 client = discord.Client()
 
+handler = logging.StreamHandler()
+handler.setFormatter(logging.Formatter("[%(levelname)s] [%(asctime)s] [%(filename)s] %(message)s"))
+
+logger = logging.getLogger(__name__)
+logger.addHandler(handler)
+logger.setLevel(logging.INFO)
+
 admin_id = os.getenv('ADMIN_ID')
 
 denoucements = [
@@ -21,7 +29,7 @@ carthaginians = []
 
 targets = []
 
-generals = ['Hannibal']
+generals = ['Hannibal', 'Alexandros']
 
 retorts = [
     'I fart in your general direction!',
@@ -34,7 +42,7 @@ retorts = [
 
 @client.event
 async def on_ready():
-    print(f'We have logged in as {client.user}.')
+    logger.info("Log in as %s", client.user)
 
 def usage():
     greeting = 'Greetings Plebians.  I am Cato the Elder.'
@@ -71,25 +79,27 @@ def usage():
 
 @client.event
 async def on_message(message):
+    logger.info("Receive message %s", message.id)
+
     if message.author == client.user:
         return
 
     authorized = str(message.author.id) == admin_id
     msg = message.content
 
-    def reduce_spotted(spotted, carthigian):
-        return spotted or message.author.display_name == carthigian
+    def reduce_spotted(spotted, carthaginian):
+        return spotted or message.author.display_name == carthaginian
 
     re_flags = re.IGNORECASE
 
     # Check if Cato needs an introduction
     introduce = re.search(r'introduc(?:e|tion)', msg, re_flags) and re.search(r"cato", msg, re_flags)
 
-    # Add a Carthigian if a new Carthigian is spotted
-    added = re.search(r'(?:new|another) carthaginian (?:named|called) "([A-Za-z ]+)"', msg, re_flags)
+    # Add a Carthaginian if a new Carthaginian is spotted
+    added = re.search(r'(?:new|another) Carthaginian (?:named|called) "([A-Za-z0-9 ]+)"', msg, re_flags)
 
-    # Remove a Carthigian if a new Carthigian is removed
-    removed = re.search(r'(?:killed|removed) carthaginian (?:named|called) "([A-Za-z ]+)"', msg, re_flags)
+    # Remove a Carthaginian if a new Carthaginian is removed
+    removed = re.search(r'(?:killed|removed) Carthaginian (?:named|called) "([A-Za-z0-9 ]+)"', msg, re_flags)
 
     # Check if any Carthaginians have been spotted
     spotted = functools.reduce(reduce_spotted, carthaginians, False)
@@ -98,21 +108,27 @@ async def on_message(message):
     gens = functools.reduce(reduce_spotted, generals, False)
 
     if introduce:
+        logger.info("Introduce Cato")
         await message.channel.send(usage())
 
     elif authorized and added:
+        logger.info("Add Carthaginian %s", added.group(1))
         carthaginians.append(added.group(1))
 
     elif authorized and removed:
+        logger.info("Remove Carthaginian %s", added.group(1))
         carthaginians.remove(removed.group(1))
 
     elif spotted:
+        logger.info("Report enemy")
         await message.channel.send('Ceterum autem censeo Carthaginem esse delendam.')
 
     elif gens:
+        logger.info("Taunt enemy")
         await message.channel.send(random.choice(retorts))
 
     elif quote.should_respond(msg):
+        logger.info("Deliver quote")
         await message.channel.send(quote.make_reply(msg))
 
 client.run(os.getenv('TOKEN'))

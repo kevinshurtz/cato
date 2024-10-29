@@ -12,8 +12,8 @@ mccabe==0.6.1
 multidict==5.1.0
 pylint==2.7.2
 python-dotenv==0.15.0
-PyYAML==5.4.1
+PyYAML==6.0.2
 toml==0.10.2
 typing-extensions==3.7.4.3
 wrapt==1.12.1
-yarl==1.6.3
+yarl==1.9.4

@@ -6,6 +6,7 @@ import functools
 import textwrap
 import random
 import yaml
+from . import quote
 
 dotenv.load_dotenv()
 client = discord.Client()
@@ -20,7 +21,7 @@ with open('./dialog/quotes.yaml') as file:
     quotes = yaml.safe_load(file)
     wisdom = [quote['content'] for quote in quotes['quotes']]
 
-carthigians = []
+carthaginians = []
 
 targets = []
 
@@ -51,7 +52,7 @@ def usage():
     detail_first = ' '.join([
         'The first and most important of my responsibilities is to challenge',
         'the Punic threat wherever I see it and to denounce the apologists of',
-        'the Carthigian menace.  Their remarks will always be met with my',
+        'the Carthaginian menace.  Their remarks will always be met with my',
         'customary reply.'
     ])
     detail_second = ' '.join([
@@ -95,22 +96,19 @@ async def on_message(message):
     removed = re.search(r'(?:killed|removed) carthaginian (?:named|called) "([A-Za-z ]+)"', msg, re_flags)
 
     # Check if any Carthaginians have been spotted
-    spotted = functools.reduce(reduce_spotted, carthigians, False)
+    spotted = functools.reduce(reduce_spotted, carthaginians, False)
 
     # Check if Hannibal or his associates are in view
     gens = functools.reduce(reduce_spotted, generals, False)
-
-    # Check if anyone is interested in some wisdom
-    quotes = re.search(r"cato(?:'s)?", msg, re_flags) and re.search(r'quote(?:s|d)?', msg, re_flags)
 
     if introduce:
         await message.channel.send(usage())
 
     elif authorized and added:
-        carthigians.append(added.group(1))
+        carthaginians.append(added.group(1))
 
     elif authorized and removed:
-        carthigians.remove(removed.group(1))
+        carthaginians.remove(removed.group(1))
 
     elif spotted:
         await message.channel.send('Ceterum autem censeo Carthaginem esse delendam.')
@@ -118,7 +116,7 @@ async def on_message(message):
     elif gens:
         await message.channel.send(random.choice(retorts))
 
-    elif quotes:
-        await message.channel.send(random.choice(wisdom))
+    elif quote.should_respond(msg):
+        await message.channel.send(quote.make_reply(msg))
 
 client.run(os.getenv('TOKEN'))

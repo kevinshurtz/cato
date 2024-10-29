@@ -5,6 +5,7 @@ import re
 import functools
 import textwrap
 import random
+import yaml
 
 dotenv.load_dotenv()
 client = discord.Client()
@@ -15,31 +16,24 @@ denoucements = [
     'Ceterum autem censeo Carthaginem esse delendam.'
 ]
 
-wisdom = [
-    'Those who are serious in ridiculous matters will be ridiculous in serious matters.',
-    'If you are ruled by mind you are a king; if by body, a slave.',
-    'I prefer to do right and get no thanks than to do wrong and receive no punishment.',
-    'Wise men profit more from fools than fools from wise men; for the wise men shun the mistakes of fools, but fools do not imitate the successes of the wise.',
-    'We cannot control the evil tongues of others; but a good life enables us to disregard them.',
-    'After I\'m dead I\'d rather have people ask why I have no monument than why I have one.',
-    'The hero saves us. Praise the hero! Now, who will save us from the hero?',
-    'The worst ruler is one who cannot rule himself.',
-    'I think the first virtue is to restrain the tongue; he approaches nearest to gods who knows how to be silent, even though he is in the right.',
-    'Tis sometimes the height of wisdom to feign stupidity.',
-    'An angry man opens his mouth and shuts his eyes.',
-    'Anger so clouds the mind that it cannot perceive the truth.',
-    'He who fears death has already lost the life he covets.',
-    'I can pardon everybody\'s mistakes except my own.',
-    'Patience is the greatest of all virtues.',
-    'It is a difficult matter to argue with the belly since it has no ears.',
-    'Speech is the gift of all, but the thought of few.',
-    'Grasp the subject, the words will follow.',
-    'Wise men learn more from fools than fools from the wise.',
-    'Buy not what you want, but what you have need of; what you do not want is dear at a farthing.',
-    'Even though work stops, expenses run on.'
-]
+with open('./quotes/wisdom.yaml') as file:
+    quotes = yaml.safe_load(file)
+    wisdom = [quote['content'] for quote in quotes['quotes']]
 
 carthigians = []
+
+targets = []
+
+generals = ['Hannibal']
+
+retorts = [
+    'I fart in your general direction!',
+    'Your mother was a hamster, and your father smelled of elderberries!',
+    'Mind your own business!',
+    'You don\'t frigthen us, Carthaginian pig-dogs!',
+    'Go and boil your bottoms, sons of a silly person.',
+    'I blow my nose at you, so-called Hannibal general, you and your silly Numidian caaaavlry.'
+]
 
 @client.event
 async def on_ready():
@@ -77,6 +71,7 @@ def usage():
         {final_greeting}
     ''')
 
+
 @client.event
 async def on_message(message):
     if message.author == client.user:
@@ -94,15 +89,18 @@ async def on_message(message):
     introduce = re.search(r'introduc(?:e|tion)', msg, re_flags) and re.search(r"cato", msg, re_flags)
 
     # Add a Carthigian if a new Carthigian is spotted
-    added = re.search(r'(?:new|another) carthigian (?:named|called) (\w+)\b', msg, re_flags)
+    added = re.search(r'(?:new|another) carthaginian (?:named|called) "([A-Za-z ]+)"', msg, re_flags)
 
     # Remove a Carthigian if a new Carthigian is removed
-    removed = re.search(r'(?:killed|removed) carthigian (?:named|called) (\w+)\b', msg, re_flags)
+    removed = re.search(r'(?:killed|removed) carthaginian (?:named|called) "([A-Za-z ]+)"', msg, re_flags)
 
-    # Check if any Carthigians have been spotted
+    # Check if any Carthaginians have been spotted
     spotted = functools.reduce(reduce_spotted, carthigians, False)
 
-    # Check if anyone is interested 
+    # Check if Hannibal or his associates are in view
+    gens = functools.reduce(reduce_spotted, generals, False)
+
+    # Check if anyone is interested in some wisdom
     quotes = re.search(r"cato(?:'s)?", msg, re_flags) and re.search(r'quote(?:s|d)?', msg, re_flags)
 
     if introduce:
@@ -116,6 +114,9 @@ async def on_message(message):
 
     elif spotted:
         await message.channel.send('Ceterum autem censeo Carthaginem esse delendam.')
+
+    elif gens:
+        await message.channel.send(random.choice(retorts))
 
     elif quotes:
         await message.channel.send(random.choice(wisdom))

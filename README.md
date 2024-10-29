@@ -6,9 +6,9 @@ A fun Discord bot to share the wisdom and wit of Cato the Elder.
 
 ### Who is Cato the Elder?
 
-Cato the Elder was a Roman Senator between the second and third Punic wars, and
-was great grandfather to Cato the Younger, a legendary political opponent of
-Julias Caesar.
+Cato the Elder served as a Roman Senator between the second and third Punic
+Wars and was great grandfather to Cato the Younger, a legendary political
+opponent of Julias Caesar.
 
 Cato the Elder is well known for his severe Roman manners, opposition to
 Hellenization, and his strong insistence upon the destruction of

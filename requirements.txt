@@ -1,5 +1,5 @@
-aiohttp==3.7.3
-astroid==2.4.2
+aiohttp==3.7.4
+astroid==2.5.1
 async-timeout==3.0.1
 attrs==20.3.0
 chardet==3.0.4
@@ -7,12 +7,12 @@ discord==1.0.1
 discord.py==1.6.0
 idna==3.1
 isort==5.7.0
-lazy-object-proxy==1.4.3
+lazy-object-proxy==1.5.2
 mccabe==0.6.1
 multidict==5.1.0
-pylint==2.6.0
+pylint==2.7.2
 python-dotenv==0.15.0
-six==1.15.0
+PyYAML==5.4.1
 toml==0.10.2
 typing-extensions==3.7.4.3
 wrapt==1.12.1
